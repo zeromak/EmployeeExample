@@ -1,0 +1,49 @@
+﻿@using MasGlobal.Core.Interfaces;
+@model MasGlobal.Portal.Models.EmployeesModel;
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employees</title>
+</head>
+
+<body>
+    <br />
+    <div style="display:block;text-align:center;">
+        @using (Html.BeginForm("GetEmployees", "Employees", FormMethod.Get))
+        {
+            <label>Enter the ID of the employee you want to consult. If you want to get information about all the employees leave this field empty.</label>
+            <br />
+            @Html.TextBoxFor(model => model.employeeID)
+            <br />
+            <input type="submit" value="Get Employees" />
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Contract Type</th>
+                    <th>Role</th>
+                    <th>Annual Salary</th>                    
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model.lstEmployees != null && Model.lstEmployees.Count() > 0)
+            {
+                foreach (Employee objEmployee in Model.lstEmployees)
+                {
+                <tr>
+                    <td>@objEmployee.id</td>
+                    <td>@objEmployee.name</td>
+                    <td>@objEmployee.contractTypeName</td>
+                    <td>@objEmployee.roleName</td>
+                    <td>@objEmployee.CalculateAnnualSalary()</td>
+                </tr>                        
+                }  
+            }
+            </tbody>
+        </table>        
+    </div>
+</body>
+
+</html>

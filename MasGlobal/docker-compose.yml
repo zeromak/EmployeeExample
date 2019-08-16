@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  masglobal.portal:
+    image: ${DOCKER_REGISTRY-}masglobalportal
+    build:
+      context: .
+      dockerfile: MasGlobal.Portal\Dockerfile
+
+  masglobal.api:
+    image: ${DOCKER_REGISTRY-}masglobalapi
+    build:
+      context: .
+      dockerfile: MasGlobal.API\Dockerfile
+
